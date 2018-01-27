@@ -130,3 +130,53 @@
  });
  console.log(arr41);
 
+ var arr = [5, 4, 3, 2, 1];
+ var arr1 = _.first(arr, 3);
+ console.log(arr1);
+
+ var arr2 = _.initial(arr, 3);  //最初的
+ console.log(arr2);
+
+ var arr3 = _.last(arr, 2);
+ console.log(arr3);
+
+ var arr4 = _.rest(arr, 2);
+ console.log(arr4);
+
+
+ var arr20 = [0, 1, false, 2, "", 3, null, 4, undefined]; //紧凑
+ var arr21 = _.compact(arr20);
+ console.log(arr21);
+
+ var arr22 = [1, [2, [3, [4]]]];
+ var arr23 = _.flatten(arr22); //弄平
+ var arr24 = _.flatten(arr22, true);
+ console.log(arr2);
+ console.log(arr23);
+ console.log(arr24);
+
+ var arr30 = [1, 2, 1, 0, 3, 1, 4];
+ var arr31 = _.without(arr30, 0, 1);
+ console.log(arr31);
+
+ var arr40 = [[1, 2, 1, 4], [1, 2, 3, 112 ], [4, 5, 6, 2]];
+ var arr41 = _.union(arr40);
+ console.log(arr41);
+ console.log(_.union(arr40));
+ console.log(arr40);
+ console.log(_.union([1, 2, 1, 4], [1, 2, 3, 112 ], [4, 5, 6, 2]));//同盟 只能直接写数组，不能传参数
+ //把不相同的数字组成一个新的数组
+
+
+ var arr50 = _.intersection([1, 2, 6], [1, 2, 3], [1, 2, 5]);
+ console.log(arr50); //交叉，相交。把数组中相同的项组成一个新的数组，存在它的参数中
+
+ var arr60 = _.difference([1, 2, 3, 4, 5], [5, 2, 9]);
+ console.log(arr60); // 返回第一个数组中与后面的数组不相同的项
+
+ var arr70 = _.uniq([1, 2, 2, 3, 1, 4]);
+ console.log(arr70); //去重
+
+ var str1 = _.unzip([["Jim", "Toni", "Pasha"], [22, 3, 26], ["Softer", "Player", "Teacher"]]);
+ console.log(str1); // 把多个数组中相应位置的值合并在一起，组成新的数组
+
