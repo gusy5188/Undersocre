@@ -177,6 +177,8 @@
  var arr70 = _.uniq([1, 2, 2, 3, 1, 4]);
  console.log(arr70); //去重
 
- var str1 = _.unzip([["Jim", "Toni", "Pasha"], [22, 3, 26], ["Softer", "Player", "Teacher"]]);
- console.log(str1); // 把多个数组中相应位置的值合并在一起，组成新的数组
+ var str1 = _.zip(["Toni", "Pasha", "Jim"], [2, 26, 22], ["Player", "Teacher", "Student"]);
+ console.log(str1); //把多个数组中相应位置的值合并在一起，组成新的数组,参数是一个数组
 
+ var str11 = _.unzip([["Jim", "Toni", "Pasha"], [22, 3, 26], ["Softer", "Player", "Teacher"]]);
+ console.log(str11); // 参数是一个二维数组，返回的结果与_.zip的结果相同
