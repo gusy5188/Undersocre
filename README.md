@@ -182,3 +182,17 @@
 
  var str11 = _.unzip([["Jim", "Toni", "Pasha"], [22, 3, 26], ["Softer", "Player", "Teacher"]]);
  console.log(str11); // 参数是一个二维数组，返回的结果与_.zip的结果相同
+
+var arr = _.indexOf([1, 1, 2, 3,], 2);
+ console.log(arr); //返回后面的项在数组中的索引
+
+ var arr1 = _.lastIndexOf([1, 2, 3, 1, 2, 3], 3);
+ console.log(arr1); //从后向前找，找到返回所在的索引
+
+ var arr2 = _.sortedIndex([10, 20, 30, 40, 50], 45);
+ console.log(arr2);
+
+ var stooges = [{name: "Toni", age: 2}, {name: "Pasha", age: 26}];
+ var arr3 = _.sortedIndex(stooges, {name: "Jim", age: 23}, "age");
+ console.log(arr3); //把后面的项按顺序插入到数组中，返回插入项所在的索引，最后一个参数是迭代器
+
