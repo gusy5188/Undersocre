@@ -196,3 +196,29 @@ var arr = _.indexOf([1, 1, 2, 3,], 2);
  var arr3 = _.sortedIndex(stooges, {name: "Jim", age: 23}, "age");
  console.log(arr3); //把后面的项按顺序插入到数组中，返回插入项所在的索引，最后一个参数是迭代器
 
+ /*var arr1 = _.findIndex([4, 6, 8, 12], 4);
+ console.log(arr1);
+
+ var arr2 = _.findIndex([4, 6, 8, 12], isPrime);
+ console.log(arr2); // 当isPrime(最好的)为真时，返回索引
+*/
+ var users = [{"id": 1, "name": "Bob", "last": "Brown"}, {"id": 2, "name": "Ted", "last": "White"},
+              {"id": 3, "name": "Frank", "last": "James"}, {"id": 4, "name": "Ted", "last": "Jones"}];
+
+/* var arr3 = _.findLastIndex(users, {name: "Ted"});
+ console.log(arr3);// 报错，不是一个function*/
+
+ var arr4 = _.range(10);
+ console.log(arr4);
+
+ var arr5 = _.range(1, 11, 2);
+ console.log(arr5);
+
+ var arr6 = _.range(0, 50, 5);
+ console.log(arr6);
+
+ var arr7 = _.range(0, -10, -1);
+ console.log(arr7);
+
+ var arr8 = _.range(0);
+ console.log(arr8); // _.range([start], stop, [step])
