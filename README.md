@@ -222,3 +222,80 @@ var arr = _.indexOf([1, 1, 2, 3,], 2);
 
  var arr8 = _.range(0);
  console.log(arr8); // _.range([start], stop, [step])
+
+var func = function (greeting) {
+    return greeting + ":" + this.name;
+};
+
+ func = _.bind(func, {name: "Jim"}, "Hi");
+ console.log(func()); //Hi:Jim  _.bind(func, object, *argument)这里的*argument指的是func中的参数
+
+ var buttonView = {
+     label: "underscore",
+     onclick: function () {
+         alert("clicked: " + this.label);
+     },
+
+     onHover: function () {
+         console.log("hovering:" + this.label);
+     }
+ };
+
+ // var obj1 = _.bindAll(buttonView, "onClick", "onHover");
+ // jQuery("#underscore_button").bind("click", buttonView.onclick);// 把按钮的"click"绑定到buttonView.onClick中，jQuery选中的
+                                                                  //按钮也有了以上的方法
+ var subtract = function (a, b) {
+     return b - a;
+ };
+
+ sub5 = _.partial(subtract, 5); //部分的，钟爱的
+ console.log(sub5(20));//先传入的5是a的参数，后传入的20是b参数，是相反的传入过程
+
+ subForm20 = _.partial(subtract, _, 20);
+ console.log(subForm20(5));//给了一个占位符相当于是a参数,后面的20就是b参数
+
+ var fibonacci = _.memoize(function (n) {
+     return n < 2 ? n: fibonacci(n - 1) + fibonacci(n - 2);
+ }); // 可以缓存函数的计算结果。 不是很理解
+
+ var log = _.bind(console.log, console); //只有console.log也是可以的为什么呢？
+  _.delay(log, 1000, "logged later"); //延时,_.delay(function, wait, *arguments)等待wait毫秒后调用function，有argument时
+                                      //argument作为参数传入
+
+ _.defer(function(){
+     alert("deferred");
+}); //延迟调用function直到当前调用栈清空为止，_.defer(function, *arguments)有argumets时会传入到函数中;
+
+ /*var throttled = _.throttle(updatePosition, 100);
+ $(window).scroll(throttled);*/ //当重量调用函数的时候，至少第隔wait毫秒调用一次。会在你调用第一时间尽快执行这个function,并且，如果
+ //在wait调用任意次数的函数，都将尽快的被覆盖。禁用第一次执行的话，传递{leading: false},禁用最后一次执行传递{trailing: false}.
+ // _.throttled(function, wait, [options]) 选项的意思，在[]的都是可选的参数
+
+ /*var laayLayout = _.debounce(calculateLayout, 300);
+ $(window).resize(lazyLayout);*///返回function函数的防反跳版本，将延迟函数的执行（真正的执行）在函数的最后一次调用 时刻的wait毫秒
+ //之后，_.debounce(function, wait, [immediate})。immediate为true,debounce会在wait时间之后开始调用这个函数。
+
+ var initialize = _.once(function () {
+     console.log("Hello world!");
+ });
+ initialize();
+ initialize();//创建只能调用一次的函数
+
+ /*var renderNotes = _.after(notes.length, render); //创建一个函数，只有在运行了count次之后才有效果
+ _.each(notes, function (note) {
+     note.asyncSave({success: renderNotes});
+ });*/
+
+ /*var mothlyMeeting = _.before(3, askForRaise); //创建一个函数，调用不超过count次。当count已经达到时，最后一个函数调用的结果将
+ mothlyMeeting();                              // 被记住并返回。
+ mothlyMeeting();
+ mothlyMeeting();*/
+
+ var hello = function (name) {
+     return "hello" + this.name;
+ };
+ hello = _.wrap(hello, function (func1) {
+     return "before," + func1("moe") + ",after";
+ });
+ console.log(hello());// 将第一个函数functin封装到函数wrapper里面，并把函数function作为第一个参数传给wrapper。理解了，但是
+                      // 结果不相同，再研究一下
