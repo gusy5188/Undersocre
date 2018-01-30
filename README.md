@@ -292,10 +292,28 @@ var func = function (greeting) {
  mothlyMeeting();*/
 
  var hello = function (name) {
-     return "hello" + this.name;
+     return "Hello:" + name;
  };
- hello = _.wrap(hello, function (func1) {
-     return "before," + func1("moe") + ",after";
+ hello = _.wrap(hello, function (hello) {
+     return "before," + hello("Toni") + ", after";
  });
+
  console.log(hello());// 将第一个函数functin封装到函数wrapper里面，并把函数function作为第一个参数传给wrapper。理解了，但是
-                      // 结果不相同，再研究一下
+                      // 结果不相同，再研究一下.结果会调用Underscore.js中的函数为什么呢？
+                      
+  var isFalsy = _.negate(Boolean); //否定的意思
+ var arr22 = _.find(["Jim", -1, true, 0, null], isFalsy); //返回第一个通过后面的函数检测的真值检测的元素值，找到后立即返回不会遍历
+ console.log(arr22); // 找到第一个不是true的，就返回了
+
+ var greet = function (name) {
+     return "hi: " + name;
+ };
+
+ var exclaim = function (statement) {
+     return statement.toUpperCase() + "!";
+ };
+
+ var welcome = _.compose(exclaim, greet); //组成，构成的意思
+ console.log(welcome("Toni")); //返回函数集functions组合后的复合函数，也就是一个函数执行完之后把返回的结果再作为参数赋给下一个函数来执行
+                               // 把函数f(), g(), 和h()组合起来可以得到复合函数f(g(h())). 
+                    
