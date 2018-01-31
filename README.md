@@ -316,4 +316,96 @@ var func = function (greeting) {
  var welcome = _.compose(exclaim, greet); //组成，构成的意思
  console.log(welcome("Toni")); //返回函数集functions组合后的复合函数，也就是一个函数执行完之后把返回的结果再作为参数赋给下一个函数来执行
                                // 把函数f(), g(), 和h()组合起来可以得到复合函数f(g(h())). 
-                    
+
+var obj1 = {one: 1, two: 2, three: 3};
+ var arr11 = _.keys(obj1);
+ console.log(arr11); // 检索object拥有的所有的可枚举的属性的名称。返回一个数组
+
+ function Stooge(name) { //助手的意思，这是一个构造函数
+     this.name = name;
+ }
+ Stooge.prototype.silly = true; //蠢的，不明事理的
+ // var arr12 = _.allKeys(new Stooge("Jim"));
+ // console.log(arr12); //检索object拥有的和继承的所有属性的名称，返回一个数组。但是这个报错
+
+ var obj11 = {one: 1, two: 2, three: 3};
+ var arr13 = _.values(obj11);
+ console.log(arr13); //返回object对象的所有的属性值
+
+ var obj22 = {start: 5, end: 12};
+ var foo = function (val, key) {//是反的，属性值在前，属性名在后面
+     return val + 5;
+ };
+
+ // console.log(_.mapObject(obj22, foo)); //类似于map,这是用于对象。转换每个属性的值。报错
+
+ var obj23 = {one: 1, two: 2, three: 3}; // 一对的意思，一对夫妻
+ console.log(_.pairs(obj23)); //把对象转变为一个[key, value]形式的数组
+
+ var obj33 = {Moe: "Moses", Larry: "Louis", Curly: "Jerome"};
+ console.log(_.invert(obj33));//返回一个object副本，使键和值对换。确保object里所有的值都是唯一的且可以序列成字符串
+
+ var moe = _.create(Stooge.prototype, {name: "Jim"});//给函数的原型增加一个作为own（自己的）属性，和Object.create一样
+
+ console.log(_.functions(_)); //返回一个对象里所有的方法名，而且是已经排序的也就是说，对象里每个方法（属性值是一个函数）的名称
+
+ // console.log(obj33, predicate); // 类似于_.findIndex,但是对于的是对象中的键
+
+ console.log(_.extend({name: "Jim"}, {name: "Toni", age: 50}));// 复制来源对象中的甩的属性覆盖到目标对象上，并且返回目标对象
+  // 复制是按顺序的，如果目标对象上有重复的会被覆盖掉。第一个是目标对象，第二个是来源对象。 延伸，扩大的意思
+
+ // _.extend(desination,*sources); // 类似于extend，但是只复制自己的属性覆盖到目标对象（不包括继承过来的属性）
+
+ var obj21 = {name: "moe", age: 30, userid: "moe1"};
+ var obj01 = _.pick(obj21, "name", "age");  //挑选的意思
+ console.log(obj01); //返回一个object副本，只过滤出keys（有效的键组成的数组）参数指定的属性值
+
+ var obj02 = _.pick(obj21, function (value, key, object) { //这里都是这样先是，值、键、对象。感觉像是反着的
+     return _.isNumber(value);
+ })
+ console.log(obj02); // 或者接受一个判断函数，指定挑选的那个keys
+
+ var obj31 = {name: "Toni", age: 2, job: "Player"};
+ var obj03 = _.omit(obj31, "job");// 省略，遗漏，删掉的意思
+ console.log(obj03);  //返回一个object副本，只过滤出除去keys(有效的键组成的数组)参数指定的属性值。指定了那个key就把那个去除掉
+
+ var obj04 = _.omit(obj31, function (value, keys, object) {
+     return _.isNumber(value); //value是数字的key
+ });
+ console.log(obj04); //或者接受一个判断函数，指定忽略的哪个key,这里就是value是数字的那个key
+
+ var obj32 = {name: "Jim"};
+ var obj33 = {name: "Toni", age: 2, job: "Player"};
+ var obj05 = _.defaults(obj32, obj33);
+ console.log(obj05); //用defaults对象（第二个参数）填充object(第一个参数）中的undefined属性。并且返回这个object.一旦这个属性被
+ // 填充，再使用default方法将不会有任何效果
+ console.log(_.defaults(obj05, {job: "Teacher"}));// 这个时候再给同一属性使用_.defaults方法已经无效
+
+ var obj33 = {name: "Pasha"};
+ console.log(_.clone(obj33)); //创建一个浅复制的克隆object.任何嵌套的对象或数组都通过引用拷贝，不会复制。
+
+ _.chain([1, 2, 3, 200])
+     .filter(function (num) {
+         return num % 2 == 0;
+     })
+     .tap(alert)
+  .map(function (num) {
+    return num * num;
+})
+    .values(); //这个不是很理解
+
+ var obj34 = {name: "Toni", age: 2, job: "Player"};
+ console.log(_.has(obj34, "name")); // 对象是否包含给定的吗？等同于object.hasOwnProperty(key),但是使用hawOwnProperty函数的
+                                     //一个安全引用，以防意外覆盖
+ console.log(obj34.hasOwnProperty("name"));
+
+ var stooge = {name: "Jim"};
+ console.log(_.property("name")(stooge));//返回一个函数，这个函数返回任何传入的对象的key属性。在这里返回的是对象stooge中的name
+                                          //键值
+
+ console.log(_.propertyOf(stooge)("name")); //  无看到的解释不太一样，返回的结果相同，还要再研究源码
+
+ var ready = _.matches({selected: true, visible: true}); //返回一个断言函数，这个函数会给你一个断言可以用来辨别给定的对象是否匹配
+                                                         // attrs(里面的唯一的一个参数)指定键/值属性
+ var readyToGoList = _.filter(list, ready); //遍历list中的每个值，返回所有通过（第二个参数可以是一个函数）真值的检测的元素所组成的数组
+
