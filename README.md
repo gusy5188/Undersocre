@@ -409,3 +409,67 @@ var obj1 = {one: 1, two: 2, three: 3};
                                                          // attrs(里面的唯一的一个参数)指定键/值属性
  var readyToGoList = _.filter(list, ready); //遍历list中的每个值，返回所有通过（第二个参数可以是一个函数）真值的检测的元素所组成的数组
 
+ var stooge = {name: "Toni", age: 2, job: "Player"};
+ var clone = {name: "Toni", age: 2, job: "Player"};
+
+ console.log(stooge == clone);
+ console.log(_.isEqual(stooge, clone)); // 执行两个对象之间的优化深度比较，确定他们是否应被视为相等。返回布尔值
+
+ var obj1 = {name: "Jim", age: 2};
+ // console.log(_.isMatch(obj1, {age: 2})); //_.isMatch(object, properties)告诉你properties中的键和值是否包含在object中。
+
+ console.log(_.isEmpty([1, 2, 3]));
+ console.log(_.isEmpty({}), _.isEmpty([])); // 如果不包含任何值返回true.对于字符串和类数组对象，如果length属性为0，也返回true.
+
+ console.log(_.isElement($("body")[0]));
+ console.log(_.isElement(document.getElementsByTagName("body")[0])); // 如果object(参数）是一个DOM元素，返回true.
+
+ var str1 = "This is my wife";
+ var arr1 = [1, 2, 3];
+ console.log(_.isArray(str1), _.isArray(arr1)); // 如果是数组，就返回true.
+
+ console.log(_.isObject({})); // _.isObject(object)如果object是一个对象，返回true.需要注意的是JavaScript数组和函数也是对象，
+ console.log(_.isObject(1));  // 字符串和数字不是对象
+
+ (function () {
+    console.log( _.isArguments(arguments));
+})(1, 2, 3);
+
+ var arg = _.isArguments([1, 2, 3]);
+ console.log(arg);
+
+ var underscore = _.noConflict(); //冲突的意思。 放弃Underscore的控制变量“_"。返回Underscore对象的引用。
+
+ var stooge = {name: "Jim", age: 2, job: "Player"};
+ // console.log(stooge === _.identity(stooge));// 返回与传入参数相等的值，相当于数学里的：f(x) = x.这个函数看似无用，但是在Underscore
+  //里被用作默认的迭代器iterator.不过在这里有报错 。身份的意思
+
+ var foo = {name: "Toni", age: 2};
+ // console.log(foo === _.contant(foo)); // 报错
+
+ // obj.initialize = _.noop;  // 返回undefined,不论传递给它是什么参数。可以用作默认可先的回调参数。初始化的意思，空的意思
+
+/* _.(3).times(function (n) {
+     genie.grantWishNumber(n);
+ });*///_.times(n, iteratee, [context]) 调用给定的迭代函数n次，第一次调用iteratee传递index参数。生成一个返回值的数组。
+
+ // console.log(_.random(0, 30)); // 返回最小到最大之间的随机整数。
+
+/* _.mixin({
+     capitalize: function (string) {
+         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+     }
+ });
+
+ console.log(_("fabio").capitalize());*/
+
+ var stooges = [{name: "curly", age: 25}, {name: "moe", age: 21}, {name: "larry", age: 23}];
+ var youngest = _.chain(stooges)
+     .sortBy(function (stooge) {
+         return stooge.age;
+     })
+     .map(function (stooge) {
+         console.log( stooge.name + "is" + stooge.age);
+     })
+     .first()
+     .values()
